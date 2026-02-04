@@ -657,34 +657,185 @@
   <!-- Final CTA / Waitlist -->
   <section id="waitlist" class="py-20 relative overflow-hidden">
     <div class="absolute inset-0 animated-gradient opacity-20"></div>
-    <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl sm:text-4xl font-bold mb-4 scroll-reveal">
-        Ready to unify your product lifecycle?
-      </h2>
-      <p class="text-xl text-gray-300 mb-8 scroll-reveal">
-        Join the waitlist for early access and product updates.
-      </p>
+    <div class="relative z-10 max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-4 scroll-reveal">
+          Ready to unify your product lifecycle?
+        </h2>
+        <p class="text-xl text-gray-300 scroll-reveal">
+          Join the waitlist for early access and product updates.
+        </p>
+      </div>
 
-      <!-- Waitlist Form -->
-      <form action="https://formsubmit.co/your-email@example.com" method="POST" class="max-w-md mx-auto scroll-reveal">
-        <input type="hidden" name="_subject" value="New st4ck Waitlist Signup!">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="https://st4ck.io?thanks=1">
+      <!-- Multi-step Waitlist Form -->
+      <div id="waitlist-form" class="glass-card p-8 scroll-reveal">
+        <!-- Progress Steps -->
+        <div class="flex items-center justify-center gap-2 mb-8">
+          <div id="step-1-indicator" class="w-3 h-3 rounded-full bg-layer-design"></div>
+          <div class="w-12 h-0.5 bg-white/20"></div>
+          <div id="step-2-indicator" class="w-3 h-3 rounded-full bg-white/20"></div>
+          <div class="w-12 h-0.5 bg-white/20"></div>
+          <div id="step-3-indicator" class="w-3 h-3 rounded-full bg-white/20"></div>
+        </div>
 
-        <div class="flex flex-col sm:flex-row gap-3">
-          <input
-            type="email"
-            name="email"
-            placeholder="Enter your email"
-            required
-            class="flex-1 px-4 py-3 bg-bg-secondary/50 border border-white/10 rounded-lg focus:outline-none focus:border-layer-design transition-colors"
-          >
-          <button type="submit" class="btn-primary whitespace-nowrap">
-            Join Waitlist
+        <!-- Step 1: Email -->
+        <div id="step-1" class="form-step">
+          <h3 class="text-xl font-semibold mb-2 text-center">Get Early Access</h3>
+          <p class="text-gray-400 text-center mb-6">Enter your email to join the waitlist</p>
+
+          <div class="space-y-4">
+            <input
+              type="email"
+              id="waitlist-email"
+              placeholder="Enter your email"
+              required
+              class="w-full px-4 py-3 bg-bg-primary/50 border border-white/10 rounded-lg focus:outline-none focus:border-layer-design transition-colors"
+            >
+            <button type="button" onclick="nextStep(1)" class="btn-primary w-full py-3">
+              Continue
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 2: Role & Company -->
+        <div id="step-2" class="form-step hidden">
+          <h3 class="text-xl font-semibold mb-2 text-center">Tell us about yourself</h3>
+          <p class="text-gray-400 text-center mb-6">Help us understand your needs</p>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm text-gray-400 mb-2">What's your role?</label>
+              <select id="waitlist-role" class="w-full px-4 py-3 bg-bg-primary/50 border border-white/10 rounded-lg focus:outline-none focus:border-layer-design transition-colors">
+                <option value="">Select your role</option>
+                <option value="product_manager">Product Manager / Product Owner</option>
+                <option value="developer">Developer / Engineer</option>
+                <option value="qa_engineer">QA / Test Engineer</option>
+                <option value="designer">Designer</option>
+                <option value="founder">Founder / Executive</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-sm text-gray-400 mb-2">Company size</label>
+              <select id="waitlist-company-size" class="w-full px-4 py-3 bg-bg-primary/50 border border-white/10 rounded-lg focus:outline-none focus:border-layer-design transition-colors">
+                <option value="">Select company size</option>
+                <option value="solo">Just me (solo/freelance)</option>
+                <option value="2-10">2-10 people</option>
+                <option value="11-50">11-50 people</option>
+                <option value="51-200">51-200 people</option>
+                <option value="200+">200+ people</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-sm text-gray-400 mb-2">Biggest pain point</label>
+              <select id="waitlist-pain-point" class="w-full px-4 py-3 bg-bg-primary/50 border border-white/10 rounded-lg focus:outline-none focus:border-layer-design transition-colors">
+                <option value="">Select your biggest challenge</option>
+                <option value="requirements_lost">Requirements get lost between meetings and code</option>
+                <option value="no_single_source">No single source of truth for product specs</option>
+                <option value="qa_no_context">QA doesn't have full context for testing</option>
+                <option value="status_updates">Stakeholders constantly asking for status updates</option>
+                <option value="outdated_docs">Documentation is always outdated</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="flex gap-3">
+              <button type="button" onclick="prevStep(2)" class="btn-secondary flex-1 py-3">
+                Back
+              </button>
+              <button type="button" onclick="nextStep(2)" class="btn-primary flex-1 py-3">
+                Continue
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: Tools & Excitement -->
+        <div id="step-3" class="form-step hidden">
+          <h3 class="text-xl font-semibold mb-2 text-center">Almost there!</h3>
+          <p class="text-gray-400 text-center mb-6">One more thing to help us serve you better</p>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm text-gray-400 mb-2">Tools you currently use (select all that apply)</label>
+              <div class="grid grid-cols-2 gap-2">
+                <label class="flex items-center gap-2 p-3 bg-bg-primary/50 border border-white/10 rounded-lg cursor-pointer hover:border-layer-design/50 transition-colors">
+                  <input type="checkbox" name="tools" value="jira" class="accent-layer-design">
+                  <span class="text-sm">Jira / Linear / Asana</span>
+                </label>
+                <label class="flex items-center gap-2 p-3 bg-bg-primary/50 border border-white/10 rounded-lg cursor-pointer hover:border-layer-design/50 transition-colors">
+                  <input type="checkbox" name="tools" value="confluence" class="accent-layer-design">
+                  <span class="text-sm">Confluence / Notion</span>
+                </label>
+                <label class="flex items-center gap-2 p-3 bg-bg-primary/50 border border-white/10 rounded-lg cursor-pointer hover:border-layer-design/50 transition-colors">
+                  <input type="checkbox" name="tools" value="figma" class="accent-layer-design">
+                  <span class="text-sm">Figma</span>
+                </label>
+                <label class="flex items-center gap-2 p-3 bg-bg-primary/50 border border-white/10 rounded-lg cursor-pointer hover:border-layer-design/50 transition-colors">
+                  <input type="checkbox" name="tools" value="github" class="accent-layer-design">
+                  <span class="text-sm">GitHub / GitLab</span>
+                </label>
+                <label class="flex items-center gap-2 p-3 bg-bg-primary/50 border border-white/10 rounded-lg cursor-pointer hover:border-layer-design/50 transition-colors">
+                  <input type="checkbox" name="tools" value="slack" class="accent-layer-design">
+                  <span class="text-sm">Slack / Discord</span>
+                </label>
+                <label class="flex items-center gap-2 p-3 bg-bg-primary/50 border border-white/10 rounded-lg cursor-pointer hover:border-layer-design/50 transition-colors">
+                  <input type="checkbox" name="tools" value="none" class="accent-layer-design">
+                  <span class="text-sm">None yet</span>
+                </label>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm text-gray-400 mb-2">What excites you most about st4ck? (optional)</label>
+              <textarea
+                id="waitlist-excitement"
+                rows="3"
+                placeholder="Tell us what caught your attention..."
+                class="w-full px-4 py-3 bg-bg-primary/50 border border-white/10 rounded-lg focus:outline-none focus:border-layer-design transition-colors resize-none"
+              ></textarea>
+            </div>
+
+            <div class="flex gap-3">
+              <button type="button" onclick="prevStep(3)" class="btn-secondary flex-1 py-3">
+                Back
+              </button>
+              <button type="button" onclick="submitWaitlist()" id="submit-btn" class="btn-primary flex-1 py-3">
+                Join Waitlist
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Success State -->
+        <div id="step-success" class="form-step hidden text-center py-8">
+          <div class="w-16 h-16 rounded-full bg-layer-design/20 flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-layer-design" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold mb-2">Check your email!</h3>
+          <p class="text-gray-400">We've sent a confirmation link. Click it to secure your spot on the waitlist.</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="step-error" class="form-step hidden text-center py-8">
+          <div class="w-16 h-16 rounded-full bg-layer-ship/20 flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-layer-ship" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold mb-2">Something went wrong</h3>
+          <p class="text-gray-400 mb-4" id="error-message">Please try again later.</p>
+          <button type="button" onclick="resetForm()" class="btn-primary">
+            Try Again
           </button>
         </div>
-        <p class="text-sm text-gray-500 mt-3">No spam. Early access + product updates only.</p>
-      </form>
+      </div>
+
+      <p class="text-sm text-gray-500 mt-4 text-center">No spam. Early access + product updates only.</p>
     </div>
   </section>
 
